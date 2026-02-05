@@ -1,0 +1,18 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      apiKey:
+        type: string
+        description: "TinyFn API key from https://tinyfn.io/dashboard"
+    required:
+      - apiKey
+  commandFunction: |-
+    config => ({
+      command: 'npx',
+      args: ['-y', '@tinyfn/mcp'],
+      env: {
+        TINYFN_API_KEY: config.apiKey
+      }
+    })

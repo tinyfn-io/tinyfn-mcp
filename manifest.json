@@ -1,0 +1,119 @@
+{
+  "manifest_version": "0.3",
+  "name": "tinyfn-mcp",
+  "display_name": "TinyFn MCP",
+  "version": "1.0.0",
+  "description": "500+ deterministic tools for AI agents - eliminate hallucinations in math, conversions, and validations",
+  "long_description": "TinyFn MCP Server provides AI agents with 500+ deterministic utility functions that always return correct results. LLMs hallucinate on basic math, mess up unit conversions, and can't reliably validate data. TinyFn fixes this with reliable tools for math operations, string manipulation, validation, encoding, date/time handling, and more.",
+  "author": {
+    "name": "TinyFn",
+    "email": "support@tinyfn.io",
+    "url": "https://tinyfn.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tinyfn/tinyfn-mcp.git"
+  },
+  "homepage": "https://tinyfn.io",
+  "documentation": "https://tinyfn.io/docs",
+  "support": "https://github.com/tinyfn/tinyfn-mcp/issues",
+  "icon": "icon.png",
+  "keywords": [
+    "math",
+    "validation",
+    "conversion",
+    "encoding",
+    "hashing",
+    "datetime",
+    "utilities",
+    "deterministic",
+    "no-hallucination"
+  ],
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "@tinyfn/mcp",
+    "mcp_config": {
+      "command": "npx",
+      "args": ["-y", "@tinyfn/mcp"],
+      "env": {
+        "TINYFN_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    {"name": "is_even", "description": "Check if a number is even"},
+    {"name": "is_odd", "description": "Check if a number is odd"},
+    {"name": "is_prime", "description": "Check if a number is prime"},
+    {"name": "factorial", "description": "Calculate the factorial of a number"},
+    {"name": "fibonacci", "description": "Get the nth Fibonacci number"},
+    {"name": "gcd", "description": "Calculate greatest common divisor of two numbers"},
+    {"name": "lcm", "description": "Calculate least common multiple of two numbers"},
+    {"name": "percentage", "description": "Calculate percentage of a value"},
+    {"name": "average", "description": "Calculate the average of numbers"},
+    {"name": "power", "description": "Calculate x raised to the power of y"},
+    {"name": "square_root", "description": "Calculate the square root of a number"},
+    {"name": "validate_email", "description": "Validate email address format"},
+    {"name": "validate_url", "description": "Validate URL format"},
+    {"name": "validate_phone", "description": "Validate phone number format"},
+    {"name": "validate_credit_card", "description": "Validate credit card number using Luhn algorithm"},
+    {"name": "validate_uuid", "description": "Validate UUID format"},
+    {"name": "validate_ip", "description": "Validate IPv4 or IPv6 address"},
+    {"name": "validate_json", "description": "Validate JSON syntax"},
+    {"name": "celsius_to_fahrenheit", "description": "Convert Celsius to Fahrenheit"},
+    {"name": "fahrenheit_to_celsius", "description": "Convert Fahrenheit to Celsius"},
+    {"name": "kilometers_to_miles", "description": "Convert kilometers to miles"},
+    {"name": "miles_to_kilometers", "description": "Convert miles to kilometers"},
+    {"name": "kilograms_to_pounds", "description": "Convert kilograms to pounds"},
+    {"name": "pounds_to_kilograms", "description": "Convert pounds to kilograms"},
+    {"name": "hex_to_rgb", "description": "Convert hex color to RGB"},
+    {"name": "rgb_to_hex", "description": "Convert RGB to hex color"},
+    {"name": "base64_encode", "description": "Encode string to Base64"},
+    {"name": "base64_decode", "description": "Decode Base64 to string"},
+    {"name": "url_encode", "description": "URL encode a string"},
+    {"name": "url_decode", "description": "URL decode a string"},
+    {"name": "hash_md5", "description": "Generate MD5 hash"},
+    {"name": "hash_sha256", "description": "Generate SHA-256 hash"},
+    {"name": "hash_sha512", "description": "Generate SHA-512 hash"},
+    {"name": "generate_uuid", "description": "Generate a UUID v4"},
+    {"name": "generate_password", "description": "Generate a secure random password"},
+    {"name": "random_number", "description": "Generate a random number in range"},
+    {"name": "random_string", "description": "Generate a random alphanumeric string"},
+    {"name": "get_now", "description": "Get current timestamp"},
+    {"name": "format_date", "description": "Format a date/timestamp"},
+    {"name": "parse_date", "description": "Parse a date string"},
+    {"name": "date_diff", "description": "Calculate difference between two dates"},
+    {"name": "convert_timezone", "description": "Convert time between timezones"},
+    {"name": "calculate_age", "description": "Calculate age from birthdate"},
+    {"name": "reverse_string", "description": "Reverse a string"},
+    {"name": "uppercase", "description": "Convert string to uppercase"},
+    {"name": "lowercase", "description": "Convert string to lowercase"},
+    {"name": "camel_case", "description": "Convert string to camelCase"},
+    {"name": "snake_case", "description": "Convert string to snake_case"},
+    {"name": "kebab_case", "description": "Convert string to kebab-case"},
+    {"name": "slug", "description": "Convert string to URL-safe slug"},
+    {"name": "word_count", "description": "Count words in text"},
+    {"name": "calculate_mean", "description": "Calculate arithmetic mean"},
+    {"name": "calculate_median", "description": "Calculate median value"},
+    {"name": "calculate_mode", "description": "Calculate mode (most frequent value)"},
+    {"name": "calculate_stddev", "description": "Calculate standard deviation"},
+    {"name": "compound_interest", "description": "Calculate compound interest"},
+    {"name": "loan_payment", "description": "Calculate monthly loan payment"},
+    {"name": "calculate_bmi", "description": "Calculate Body Mass Index"},
+    {"name": "calculate_bmr", "description": "Calculate Basal Metabolic Rate"}
+  ],
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "API Key",
+      "description": "Your TinyFn API key from https://tinyfn.io/dashboard",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

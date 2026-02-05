@@ -1,0 +1,20 @@
+# Development files
+.git/
+.github/
+test/
+*.test.js
+*.spec.js
+
+# Documentation
+*.md
+!README.md
+
+# Config files
+.gitignore
+.env*
+*.yml
+*.yaml
+
+# Assets (keep icon)
+assets/
+!icon.png
