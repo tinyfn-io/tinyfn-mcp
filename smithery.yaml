@@ -1,18 +1,19 @@
 startCommand:
-  type: stdio
+  type: http
   configSchema:
     type: object
     properties:
       apiKey:
         type: string
         description: "TinyFn API key from https://tinyfn.io/dashboard"
+      server:
+        type: string
+        default: "math"
+        description: "MCP server category (math, validate, convert, hash, encode, etc.)"
     required:
       - apiKey
-  commandFunction: |-
-    config => ({
-      command: 'npx',
-      args: ['-y', '@tinyfn/mcp'],
-      env: {
-        TINYFN_API_KEY: config.apiKey
-      }
-    })
+  deploymentUrl: https://api.tinyfn.io/mcp/
+  configMapping:
+    url: "https://api.tinyfn.io/mcp/${server}/"
+    headers:
+      X-API-Key: "${apiKey}"

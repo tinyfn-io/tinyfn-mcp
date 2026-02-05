@@ -11,23 +11,20 @@
   </p>
 
   <p>
-    <a href="https://www.npmjs.com/package/@tinyfn/mcp">
-      <img src="https://img.shields.io/npm/v/@tinyfn/mcp?style=for-the-badge&color=blue" alt="npm version"/>
-    </a>
-    <a href="https://www.npmjs.com/package/@tinyfn/mcp">
-      <img src="https://img.shields.io/npm/dw/@tinyfn/mcp?style=for-the-badge&color=green" alt="npm downloads"/>
-    </a>
-    <a href="https://github.com/tinyfn/tinyfn-mcp/blob/main/LICENSE">
+    <a href="https://github.com/tinyfn-io/tinyfn-mcp/blob/main/LICENSE">
       <img src="https://img.shields.io/badge/license-MIT-purple?style=for-the-badge" alt="License"/>
+    </a>
+    <a href="https://docs.tinyfn.io">
+      <img src="https://img.shields.io/badge/docs-tinyfn.io-blue?style=for-the-badge" alt="Documentation"/>
     </a>
   </p>
 
   <p>
     <a href="#-quick-start">Quick Start</a> •
-    <a href="#-features">Features</a> •
+    <a href="#-available-mcp-servers">Servers</a> •
     <a href="#-tool-categories">Tools</a> •
     <a href="#-pricing">Pricing</a> •
-    <a href="https://tinyfn.io/docs">Docs</a>
+    <a href="https://docs.tinyfn.io">Docs</a>
   </p>
 
   <div>
@@ -74,69 +71,103 @@ LLMs are incredible at reasoning, creativity, and understanding context. But the
 
 ## ⚡ Quick Start
 
+> 💡 **Get your free API key at [tinyfn.io](https://tinyfn.io)**
+
 ### Claude Desktop
 
-Add to your `claude_desktop_config.json`:
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
 
 ```json
 {
   "mcpServers": {
-    "tinyfn": {
-      "command": "npx",
-      "args": ["-y", "@tinyfn/mcp"],
-      "env": {
-        "TINYFN_API_KEY": "your-api-key"
+    "tinyfn-math": {
+      "url": "https://api.tinyfn.io/mcp/math/",
+      "headers": {
+        "X-API-Key": "tf_live_YOUR_KEY_HERE"
       }
     }
   }
 }
 ```
 
-### Cursor
+> **Note:** Claude Desktop supports ~100 tools, so add 2-3 category servers as needed.
 
-Add to your Cursor MCP settings:
+### Cursor & Windsurf
+
+These platforms have a ~40 tool limit. Add to your MCP config:
 
 ```json
 {
   "mcpServers": {
-    "tinyfn": {
-      "command": "npx",
-      "args": ["-y", "@tinyfn/mcp"],
-      "env": {
-        "TINYFN_API_KEY": "your-api-key"
+    "tinyfn-validate": {
+      "url": "https://api.tinyfn.io/mcp/validate/",
+      "headers": {
+        "X-API-Key": "tf_live_YOUR_KEY_HERE"
       }
     }
   }
 }
 ```
+
+Recommended servers: `validate` (25 tools), `hash` (10 tools), `encode` (15 tools).
 
 ### Claude Code
 
-Add to your `~/.claude/settings.json`:
+Claude Code supports Tool Search, so you can use the full server with all 500+ tools:
 
 ```json
 {
   "mcpServers": {
     "tinyfn": {
-      "command": "npx",
-      "args": ["-y", "@tinyfn/mcp"],
-      "env": {
-        "TINYFN_API_KEY": "your-api-key"
+      "url": "https://api.tinyfn.io/mcp/all/",
+      "headers": {
+        "X-API-Key": "tf_live_YOUR_KEY_HERE"
       }
     }
   }
 }
 ```
 
-### Hosted Server (No Installation)
+### Continue.dev
 
-Use our hosted MCP endpoint directly:
-
+```json
+{
+  "experimental": {
+    "mcpServers": [
+      {
+        "name": "tinyfn",
+        "url": "https://api.tinyfn.io/mcp/math/",
+        "headers": {
+          "X-API-Key": "tf_live_YOUR_KEY_HERE"
+        }
+      }
+    ]
+  }
+}
 ```
-https://mcp.tinyfn.io?key=YOUR_API_KEY
-```
 
-> 💡 **Get your free API key at [tinyfn.io](https://tinyfn.io)**
+> ⚠️ **Important:** URLs must end with `/` or requests will fail with 404 errors.
+
+---
+
+## 📡 Available MCP Servers
+
+| Server | URL | Tools | Best For |
+|--------|-----|-------|----------|
+| **All** | `/mcp/all/` | 500+ | Claude Code (with Tool Search) |
+| **Math** | `/mcp/math/` | 55+ | Arithmetic, trigonometry, comparisons |
+| **Convert** | `/mcp/convert/` | 40+ | Temperature, length, weight conversions |
+| **Validate** | `/mcp/validate/` | 25+ | Email, URL, phone, credit card validation |
+| **String** | `/mcp/string/` | 30+ | Text manipulation, counting |
+| **Hash** | `/mcp/hash/` | 10+ | MD5, SHA256, SHA512, bcrypt |
+| **Encode** | `/mcp/encode/` | 15+ | Base64, URL, HTML encoding |
+| **Datetime** | `/mcp/datetime/` | 30+ | Date parsing, formatting, timezones |
+| **Color** | `/mcp/color/` | 30+ | Color conversion, manipulation |
+| **Stats** | `/mcp/stats/` | 20+ | Mean, median, standard deviation |
+| **Finance** | `/mcp/finance/` | 15+ | Interest, loans, ROI |
+| **Generate** | `/mcp/generate/` | 15+ | UUIDs, passwords, random values |
+
+All servers use base URL: `https://api.tinyfn.io`
 
 ---
 
@@ -364,47 +395,17 @@ TinyFn provides **500+ tools** organized into categories:
 
 ---
 
-## 🔧 Configuration
-
-### Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `TINYFN_API_KEY` | Your TinyFn API key | Required |
-| `TINYFN_BASE_URL` | API base URL | `https://api.tinyfn.io` |
-| `TINYFN_TIMEOUT` | Request timeout (ms) | `5000` |
-
-### REST API
-
-TinyFn also provides a standard REST API:
-
-```bash
-# Check if a number is prime
-curl "https://api.tinyfn.io/v1/math/is-prime?number=17" \
-  -H "X-API-Key: your-api-key"
-
-# Generate a UUID
-curl "https://api.tinyfn.io/v1/generators/uuid" \
-  -H "X-API-Key: your-api-key"
-
-# Convert temperature
-curl "https://api.tinyfn.io/v1/conversions/celsius-to-fahrenheit?celsius=25" \
-  -H "X-API-Key: your-api-key"
-```
-
----
-
 ## 📚 Documentation
 
 <div align="center">
-  <a href="https://tinyfn.io/docs">
-    <img src="https://img.shields.io/badge/📖_API_Docs-blue?style=for-the-badge" alt="API Docs"/>
+  <a href="https://docs.tinyfn.io">
+    <img src="https://img.shields.io/badge/📖_Docs-blue?style=for-the-badge" alt="Docs"/>
   </a>
-  <a href="https://tinyfn.io/docs/examples">
-    <img src="https://img.shields.io/badge/💡_Examples-green?style=for-the-badge" alt="Examples"/>
+  <a href="https://docs.tinyfn.io/mcp/overview">
+    <img src="https://img.shields.io/badge/🔌_MCP_Guide-green?style=for-the-badge" alt="MCP Guide"/>
   </a>
-  <a href="https://tinyfn.io/changelog">
-    <img src="https://img.shields.io/badge/📋_Changelog-orange?style=for-the-badge" alt="Changelog"/>
+  <a href="https://docs.tinyfn.io/api">
+    <img src="https://img.shields.io/badge/🛠️_API_Reference-orange?style=for-the-badge" alt="API Reference"/>
   </a>
 </div>
 
@@ -413,8 +414,7 @@ curl "https://api.tinyfn.io/v1/conversions/celsius-to-fahrenheit?celsius=25" \
 ## 🤝 Support
 
 - 📧 Email: [support@tinyfn.io](mailto:support@tinyfn.io)
-- 💬 Discord: [Join our community](https://discord.gg/tinyfn)
-- 🐛 Issues: [GitHub Issues](https://github.com/tinyfn/tinyfn-mcp/issues)
+- 🐛 Issues: [GitHub Issues](https://github.com/tinyfn-io/tinyfn-mcp/issues)
 
 ---
 
@@ -430,7 +430,7 @@ MIT License - see [LICENSE](LICENSE) for details.
   </p>
   <p>
     <a href="https://tinyfn.io">Website</a> •
-    <a href="https://tinyfn.io/docs">Documentation</a> •
-    <a href="https://twitter.com/tinyfn">Twitter</a>
+    <a href="https://docs.tinyfn.io">Documentation</a> •
+    <a href="https://twitter.com/tinyfn_io">Twitter</a>
   </p>
 </div>
