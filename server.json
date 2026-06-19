@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.tinyfn/tinyfn",
+  "title": "TinyFn",
+  "description": "500+ deterministic tools for AI agents: math, conversion, validation, hashing, encoding, date/time.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/tinyfn-io/tinyfn-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.tinyfn.io/mcp/all/",
+      "headers": [
+        {
+          "name": "X-API-Key",
+          "description": "TinyFn API key - free at https://tinyfn.io",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
